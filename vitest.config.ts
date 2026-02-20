@@ -1,5 +1,5 @@
 /**
- * Vitest Configuration for @tinyland-inc/tinyland-event-loader
+ * Vitest Configuration for @tummycrypt/tinyland-event-loader
  *
  * Works in three modes:
  *   1. Standalone:  cd packages/tinyland-event-loader && pnpm test

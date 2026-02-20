@@ -1,5 +1,5 @@
 {
-  "name": "@tinyland-inc/tinyland-event-loader",
+  "name": "@tummycrypt/tinyland-event-loader",
   "version": "0.1.0",
   "description": "File-based markdown event loader with frontmatter parsing and query helpers",
   "type": "module",
@@ -44,5 +44,9 @@
   },
   "engines": {
     "node": ">=22.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }

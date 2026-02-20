@@ -1,5 +1,5 @@
 /**
- * @tinyland-inc/tinyland-event-loader
+ * @tummycrypt/tinyland-event-loader
  *
  * File-based markdown event loader with frontmatter parsing and query helpers.
  * Reads .md, .mdx, and .svx files from a configurable directory, parses
@@ -7,7 +7,7 @@
  *
  * @example
  * ```typescript
- * import { configure, loadEventsServer, getUpcomingEventsServer } from '@tinyland-inc/tinyland-event-loader';
+ * import { configure, loadEventsServer, getUpcomingEventsServer } from '@tummycrypt/tinyland-event-loader';
  *
  * configure({ baseDir: process.cwd() });
  * const events = loadEventsServer();
