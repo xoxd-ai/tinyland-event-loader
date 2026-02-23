@@ -61,7 +61,7 @@ describe('config', () => {
       configure({ baseDir: '/second' });
       const config = getConfig();
       expect(config.baseDir).toBe('/second');
-      expect(config.wordsPerMinute).toBe(225); // back to default
+      expect(config.wordsPerMinute).toBe(225); 
     });
   });
 

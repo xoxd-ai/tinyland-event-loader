@@ -13,9 +13,9 @@ import {
   getEventsByOrganizerServer,
 } from '../src/event-loader.js';
 
-/**
- * Helper to create a markdown event file with YAML frontmatter.
- */
+
+
+
 function createEventFile(
   dir: string,
   filename: string,
@@ -48,9 +48,9 @@ afterEach(() => {
   rmSync(tmpBase, { recursive: true, force: true });
 });
 
-// ---------------------------------------------------------------------------
-// loadEventsServer
-// ---------------------------------------------------------------------------
+
+
+
 describe('loadEventsServer', () => {
   it('should load .md files from configured path', () => {
     createEventFile(eventsDir, 'test-event.md', {
@@ -137,7 +137,7 @@ describe('loadEventsServer', () => {
   });
 
   it('should calculate readingTime based on wordsPerMinute', () => {
-    // 225 words => 1 minute at default 225 wpm
+    
     const words = Array.from({ length: 225 }, (_, i) => `word${i}`).join(' ');
     createEventFile(
       eventsDir,
@@ -152,7 +152,7 @@ describe('loadEventsServer', () => {
   it('should calculate readingTime with custom wordsPerMinute', () => {
     resetConfig();
     configure({ baseDir: tmpBase, wordsPerMinute: 100 });
-    // 200 words at 100 wpm = 2 minutes
+    
     const words = Array.from({ length: 200 }, (_, i) => `word${i}`).join(' ');
     createEventFile(
       eventsDir,
@@ -165,7 +165,7 @@ describe('loadEventsServer', () => {
   });
 
   it('should ceil readingTime for partial minutes', () => {
-    // 226 words at 225 wpm = ceil(226/225) = 2
+    
     const words = Array.from({ length: 226 }, (_, i) => `word${i}`).join(' ');
     createEventFile(
       eventsDir,
@@ -208,7 +208,7 @@ describe('loadEventsServer', () => {
       title: 'No Date',
     });
     const events = loadEventsServer();
-    // Should be a valid ISO date string
+    
     expect(() => new Date(events[0].frontmatter.startDate!)).not.toThrow();
     expect(new Date(events[0].frontmatter.startDate!).getTime()).not.toBeNaN();
   });
@@ -330,9 +330,9 @@ describe('loadEventsServer', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// getUpcomingEventsServer
-// ---------------------------------------------------------------------------
+
+
+
 describe('getUpcomingEventsServer', () => {
   it('should return only future events', () => {
     createEventFile(eventsDir, 'past.md', {
@@ -411,13 +411,13 @@ describe('getUpcomingEventsServer', () => {
     createEventFile(eventsDir, 'no-date.md', {
       title: 'No Date',
     });
-    // The default startDate gets set in loadEventsServer, but the filter
-    // checks startDate, startDateTime, and date from frontmatter.
-    // Since the original code sets startDate default, this event will have a
-    // startDate in the frontmatter. We need an event that truly has no parseable date.
+    
+    
+    
+    
     const upcoming = getUpcomingEventsServer();
-    // The event gets a generated startDate (today's ISO), so it may or may not be upcoming
-    // depending on timing. The key behavior is it doesn't crash.
+    
+    
     expect(Array.isArray(upcoming)).toBe(true);
   });
 
@@ -454,9 +454,9 @@ describe('getUpcomingEventsServer', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// getPastEventsServer
-// ---------------------------------------------------------------------------
+
+
+
 describe('getPastEventsServer', () => {
   it('should return only past events', () => {
     createEventFile(eventsDir, 'past.md', {
@@ -568,15 +568,15 @@ describe('getPastEventsServer', () => {
       title: 'A',
       startDate: '2020-01-01',
     });
-    // limit=0 is falsy, so it returns all past events
+    
     const past = getPastEventsServer(0);
     expect(past).toHaveLength(1);
   });
 });
 
-// ---------------------------------------------------------------------------
-// getEventBySlugServer
-// ---------------------------------------------------------------------------
+
+
+
 describe('getEventBySlugServer', () => {
   it('should find event by slug', () => {
     createEventFile(eventsDir, 'my-event.md', {
@@ -623,9 +623,9 @@ describe('getEventBySlugServer', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// getFeaturedEventsServer
-// ---------------------------------------------------------------------------
+
+
+
 describe('getFeaturedEventsServer', () => {
   it('should return only featured events', () => {
     createEventFile(eventsDir, 'featured.md', {
@@ -694,9 +694,9 @@ describe('getFeaturedEventsServer', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// getRelatedEventsServer
-// ---------------------------------------------------------------------------
+
+
+
 describe('getRelatedEventsServer', () => {
   it('should return events with matching categories', () => {
     createEventFile(eventsDir, 'current.md', {
@@ -871,9 +871,9 @@ describe('getRelatedEventsServer', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// getEventsByOrganizerServer
-// ---------------------------------------------------------------------------
+
+
+
 describe('getEventsByOrganizerServer', () => {
   it('should filter by organizer name', () => {
     createEventFile(eventsDir, 'org1.md', {
@@ -958,9 +958,9 @@ describe('getEventsByOrganizerServer', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// Edge cases and integration
-// ---------------------------------------------------------------------------
+
+
+
 describe('edge cases', () => {
   it('should handle markdown file with empty frontmatter', () => {
     writeFileSync(join(eventsDir, 'empty-fm.md'), '---\n---\nJust content');
@@ -981,7 +981,7 @@ describe('edge cases', () => {
   });
 
   it('should handle events with organizer as object type', () => {
-    // Organizer is a string in the filter, object organizers won't match string comparison
+    
     createEventFile(eventsDir, 'obj-org.md', {
       title: 'Object Organizer',
       startDate: '2030-01-01',
