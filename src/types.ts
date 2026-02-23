@@ -1,10 +1,10 @@
-/**
- * Type definitions for tinyland-event-loader
- *
- * Internalized from $lib/types/event to remove SvelteKit coupling.
- * Uses a loosely typed frontmatter with Record<string, any> base
- * to accommodate arbitrary frontmatter fields.
- */
+
+
+
+
+
+
+
 
 export interface EventContentFrontmatter {
   title: string;

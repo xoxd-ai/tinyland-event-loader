@@ -1,9 +1,9 @@
-/**
- * Event loader functions for reading markdown event files from disk.
- *
- * All functions read events fresh from disk on every call (no caching).
- * Configure baseDir via configure() before calling any loader function.
- */
+
+
+
+
+
+
 
 import { readdirSync, readFileSync } from 'fs';
 import { join } from 'path';
@@ -11,10 +11,10 @@ import matter from 'gray-matter';
 import { getConfig } from './config.js';
 import type { EventContent } from './types.js';
 
-/**
- * Extract the effective date string from an event's frontmatter,
- * checking startDate, startDateTime, and date in order.
- */
+
+
+
+
 function getEventDateStr(event: EventContent): string | undefined {
   return (
     event.frontmatter.startDate ??
@@ -23,10 +23,10 @@ function getEventDateStr(event: EventContent): string | undefined {
   );
 }
 
-/**
- * Load all events from the configured content directory.
- * Reads events fresh from disk on every call.
- */
+
+
+
+
 export function loadEventsServer(): EventContent[] {
   const config = getConfig();
   const eventsPath = join(config.baseDir, config.contentSubPath);
@@ -73,9 +73,9 @@ export function loadEventsServer(): EventContent[] {
   }
 }
 
-/**
- * Get upcoming events (future events only), sorted by date ascending.
- */
+
+
+
 export function getUpcomingEventsServer(limit?: number): EventContent[] {
   const events = loadEventsServer();
   const now = new Date();
@@ -99,9 +99,9 @@ export function getUpcomingEventsServer(limit?: number): EventContent[] {
   return limit ? upcoming.slice(0, limit) : upcoming;
 }
 
-/**
- * Get past events, sorted by date descending (most recent first).
- */
+
+
+
 export function getPastEventsServer(limit?: number): EventContent[] {
   const events = loadEventsServer();
   const now = new Date();
@@ -125,27 +125,27 @@ export function getPastEventsServer(limit?: number): EventContent[] {
   return limit ? past.slice(0, limit) : past;
 }
 
-/**
- * Get a single event by its slug.
- */
+
+
+
 export function getEventBySlugServer(slug: string): EventContent | undefined {
   const events = loadEventsServer();
   return events.find((event) => event.slug === slug);
 }
 
-/**
- * Get featured events (frontmatter.featured === true).
- */
+
+
+
 export function getFeaturedEventsServer(limit: number = 3): EventContent[] {
   const events = loadEventsServer();
   const featured = events.filter((event) => event.frontmatter.featured);
   return featured.slice(0, limit);
 }
 
-/**
- * Get events related to a given event by matching categories or tags.
- * Excludes the current event from results.
- */
+
+
+
+
 export function getRelatedEventsServer(
   currentSlug: string,
   limit: number = 3
@@ -176,9 +176,9 @@ export function getRelatedEventsServer(
   return related.slice(0, limit);
 }
 
-/**
- * Get events by organizer name or contact email.
- */
+
+
+
 export function getEventsByOrganizerServer(organizer: string): EventContent[] {
   const events = loadEventsServer();
   return events.filter(
