@@ -1,11 +1,11 @@
-/**
- * Vitest Configuration for @tummycrypt/tinyland-event-loader
- *
- * Works in three modes:
- *   1. Standalone:  cd packages/tinyland-event-loader && pnpm test
- *   2. Workspace:   vitest run --project=tinyland-event-loader (from root)
- *   3. Bazel:       bazel test //packages/tinyland-event-loader:test
- */
+
+
+
+
+
+
+
+
 
 import { defineConfig } from 'vitest/config';
 import { fileURLToPath } from 'node:url';
